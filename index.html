@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阪急阪神百货店VIP会员</title>
+    <link rel="stylesheet" href="styles.css?v=1.0"> <!-- 引入CSS文件 -->
+    <script src="script.js?v=2.0" defer></script> <!-- 引入JS文件 -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('full3.jpg'); /* 替换为你的图片路径 */
+            background-size: contain;
+            background-repeat: no-repeat; 
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
+
+        .clock-container {
+            display: flex;
+            flex-direction: row; /* 水平排列 */
+            align-items: center;
+            position: absolute;
+            top: 13%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .clock, .date {
+            color: red;
+            font-weight: bold;
+            margin: 0 10px; /* 添加水平间距 */
+        }
+
+        .clock {
+            font-size: 2.0em;
+        }
+
+        .date {
+            font-size: 2.0em;
+        }
+
+        .blink-text {
+            color: rgb(249, 217, 54);
+            font-size: 0.8em;
+            animation: blink 1s infinite; /* 添加闪烁动画 */
+            position: absolute;
+            top:100%;
+            right: 35.5%;
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Media query for small screens */
+        @media (max-width: 600px) {
+            .clock-container {
+                top: 20%;
+                left: 50%;
+            }
+
+            .blink-text {
+                top: 5%;
+                right: 5%;
+                font-size: 0.6em;
+            }
+
+            .clock {
+                font-size: 1.0em;
+            }
+
+            .date {
+                font-size: 1.0em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="clock-container">
+        <div class="date" id="date"></div>
+        <div class="clock" id="clock"></div>
+    </div>
+    <div class="blink-text">【新消息】</div>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = (now.getMonth() + 1).toString().padStart(2, '0');
+            const day = now.getDate().toString().padStart(2, '0');
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            const dateString = `${year}/${month}/${day}`;
+            const timeString = `${hours}:${minutes}:${seconds}`;
+            document.getElementById('date').textContent = dateString;
+            document.getElementById('clock').textContent = timeString;
+        }
+
+        setInterval(updateTime, 1000);
+        updateTime();
+    </script>
+</body>
+</html>
